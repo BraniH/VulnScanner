@@ -1,2 +1,2 @@
 # VulnScanner
-Scanner for vulnerability detection.
+Scanner for vulnerabilities detection.
