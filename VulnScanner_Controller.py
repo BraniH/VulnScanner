@@ -1,13 +1,12 @@
 #! /usr/bin/env python
 
-"Scanner controller"
+"""Scanner controller"""
 
 import requests
 import re
 from urllib import parse
 from bs4 import BeautifulSoup
 import os
-
 
 
 class FunctionalityOfScan:
@@ -35,7 +34,6 @@ class FunctionalityOfScan:
                     self.target_links.append(link)
                     self.crawler(link)
         return self.target_links
-
 
     def extract_forms(self, url):
         response = self.session.get(url)
