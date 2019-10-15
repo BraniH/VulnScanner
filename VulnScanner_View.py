@@ -1,18 +1,16 @@
 #! /usr/bin/env python
 
-"Call functionality"
+"""Calls functionality"""
 
 import VulnScanner_Controller as FnOfScan
-import time
-import requests
 
 
 def save_resulst(results):
-    write = input("[?] Do you want to save results (y/n)? ")
+    write = input("[?] Do you want to save the results (y/n)? ")
     temp = ["y", "n"]
     while write not in temp:
         print("[!] Bad input!")
-        write = input("[?] Do you want to save results (y/n)?")
+        write = input("[?] Do you want to save the results (y/n)?")
         write = write.replace(" ", "")
 
     if write == "y":
@@ -24,7 +22,7 @@ def save_resulst(results):
             print("\n[+] Finished! {0} results found. File name: {1}.".format(str(len(results)), name_of_file))
 
     elif write == "n":
-        print("\n [+] Back to main menu...")
+        print("\n [+] Back to the main menu...")
 
 
 def url_for_testing():
@@ -34,9 +32,12 @@ def url_for_testing():
     login_url = input("[?]  If you want to login, add login url else, leave empty: ")
     login_url = login_url.replace(" ", "")
 
+    username = input("[?] Add username: ")
+    user_password = input("[?] Add password: ")
+
     try:
         if login_url != "":
-            data_dict = {"username": "admin", "password": "password", "Login": "submit"}
+            data_dict = {"username": username, "password": user_password, "Login": "submit"}
             response = vuln_scanner_function.session.post(login_url, data=data_dict)
     except TypeError:
         print["! Bad login url"]
@@ -86,8 +87,6 @@ while True:
             except IndexError:
                 pass
 
-        print("\n\n[+] All xss results:\n\n")
-        time.sleep(1)
         for xss_site_results in xss_results:
             cleaned_xss_results.append(xss_site_results[0])
             print(xss_site_results[0])
