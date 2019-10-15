@@ -2,7 +2,7 @@
 
 "Call functionality"
 
-import FunctionalityOfScanner as FnOfScan
+import VulnScanner_Controller as FnOfScan
 import time
 import requests
 
