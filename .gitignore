@@ -1,3 +1,5 @@
-# Make git ignore output files produced by 
-# the comparer utility.
-results.txt
+# Ignore this files:
+/FileForTesting.py
+/venv
+/__pycache__
+/.idea
