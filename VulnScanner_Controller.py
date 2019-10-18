@@ -9,20 +9,20 @@ from bs4 import BeautifulSoup
 import os
 
 
-class FunctionalityOfScan:
+class ScannerController:
     def __init__(self, url):
         self.session = requests.Session()
         self.target_url = url
         self.target_links = []
 
-    def extract_links_from(self, url):
+    def extract_links(self, url):
         response = self.session.get(url)
         return re.findall('(?:href=")(.*?)"', str(response.content))
 
     def crawler(self, url=None):
         if url is None:
             url = self.target_url
-        href_links = self.extract_links_from(url)
+        href_links = self.extract_links(url)
         for link in href_links:
             link = parse.urljoin(url, link)
 
@@ -76,33 +76,33 @@ class FunctionalityOfScan:
             if "=" in link:
                 print("[+] Testing " + link)
 
-    def xss_in_foms(self, url, form):
+    def xss_in_forms(self, url, form):
         result = []
-        for xss_test_script in self.payloads_from_file():
-            response = self.submit_form(form, xss_test_script, url)
+        for payload in self.payloads_from_file():
+            response = self.submit_form(form, payload, url)
             if url not in result:
-                if xss_test_script in str(response.content):
-                    result.append(str("[+] XSS found in form: " + url + "\n Used payload: " + xss_test_script + "\n"))
+                if payload in str(response.content):
+                    result.append(str("[+] XSS found in form: " + url + "\n Used payload: " + payload + "\n"))
 
         return result
 
     def test_xss_link(self, url):
         result = []
-        for xss_test_script in self.payloads_from_file():
-            prepared_url = url.replace("=", "=" + xss_test_script)
+        for payload in self.payloads_from_file():
+            prepared_url = url.replace("=", "=" + payload)
             response = self.session.get(prepared_url)
-            if xss_test_script in str(response.content):
+            if payload in str(response.content):
                 if url not in result:
-                    result.append(str("[+] XSS found in url: " + prepared_url + "\nUsed payload: " + xss_test_script + "\n"))
+                    result.append(str("[+] XSS found in url: " + prepared_url + "\nUsed payload: " + payload + "\n"))
 
         return result
 
     def payloads_from_file(self):
         path = os.getcwd() + "\\payloads.txt"
-        all_cleaned_payloads = []
+        xss_payloads = []
         with open(path, "r") as payloads:
             all_payloads = payloads.readlines()
             for payload in all_payloads:
-                all_cleaned_payloads.append(payload.replace("\n", ""))
+                xss_payloads.append(payload.replace("\n", ""))
 
-        return all_cleaned_payloads
+        return xss_payloads
