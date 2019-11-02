@@ -82,7 +82,7 @@ class ScannerController:
             response = self.submit_form(form, payload, url)
             if url not in result:
                 if payload in str(response.content):
-                    result.append(str("[+] XSS found in form: " + url + "\n Used payload: " + payload + "\n"))
+                    result.append(str("\n[+] XSS found in form: " + url + "\n Used payload: " + payload + "\n"))
 
         return result
 
@@ -93,16 +93,17 @@ class ScannerController:
             response = self.session.get(prepared_url)
             if payload in str(response.content):
                 if url not in result:
-                    result.append(str("[+] XSS found in url: " + prepared_url + "\nUsed payload: " + payload + "\n"))
+                    result.append(str("\n[+] XSS found in url: " + prepared_url + "\nUsed payload: " + payload + "\n"))
 
         return result
 
     def payloads_from_file(self):
         path = os.getcwd() + "\\payloads.txt"
         xss_payloads = []
+
         with open(path, "r") as payloads:
-            all_payloads = payloads.readlines()
-            for payload in all_payloads:
-                xss_payloads.append(payload.replace("\n", ""))
+            for line in payloads.readlines():
+                if line not in ['\n', '\r\n']:
+                    xss_payloads.append(line.replace("\n", ""))
 
         return xss_payloads
